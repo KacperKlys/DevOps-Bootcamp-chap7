@@ -1,9 +1,9 @@
 version: '3'
 services:
-  # my-app:
-    # image: ${docker-registry}/my-app:1.0
-    # ports:
-     # - 3000:3000
+  my-app:
+    image: 104.248.20.127:8083/my-app:1.1
+    ports:
+     - 3000:3000
   mongodb:
     image: mongo
     ports:
@@ -12,7 +12,7 @@ services:
      - MONGO_INITDB_ROOT_USERNAME=admin
      - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
-     - mongo-data:/data/db
+     - mongo-data:/data/db # /data/db/ comes from mongo db docs, this is default where mongo stores data
   mongo-express:
     image: mongo-express
     restart: always
