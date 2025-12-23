@@ -70,3 +70,19 @@ Step 5: access the nodejs application from browser
     docker build -t my-app:1.0 .       
     
 The dot "." at the end of the command denotes location of the Dockerfile.
+
+### Nexus private repository.
+1. Create docker hosted repository
+2. Create role that provides access to the newly created repository
+3. Add role to the user
+4. Create in nexus endpoint for docker login (Repository Connectors section, different port than nexus endpoint)
+5. Nexus generates token for docker client authentication (REALM), its issuing needs to ba active on the nexus side. This token will be stored in ~/.docker/config.json
+6. Configure docker to accept not secured (HTTP) repository (daemon.json file).
+```
+{
+    "insecure-registries" : [ "<nexus_endpoint_ip" ]
+}
+```
+7. Then `docker login <nexus_endpoint_ip>.
+8. Build module `docker build -t <ip_nexus>/my-app:1.0`
+9. `docker push <ip_nexus>/my-app:1.0`
